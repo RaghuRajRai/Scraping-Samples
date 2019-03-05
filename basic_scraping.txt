@@ -1,0 +1,47 @@
+using HtmlAgilityPack;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+
+namespace Login
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            //URL of the page to be opened
+            var html = @"https://www.google.com/";
+            //Creating an instance of a browser
+            HtmlWeb web = new HtmlWeb();
+            //Loading the html based on Web method
+            var htmlDoc = web.Load(html);
+
+            //var node = htmlDoc.DocumentNode.SelectSingleNode("//head/title");
+            //Pulling data from an element
+            var name = htmlDoc.DocumentNode
+                            .SelectSingleNode("/html/head/title/text()");
+            //Printing data inside the element using innerhtml attribute
+            Console.WriteLine(name.InnerHtml.ToString());
+
+            /*
+            using (var client = new HttpClient())
+            {
+                var content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("email", "8050335338"),
+                    new KeyValuePair<string, string>("password", "reset000")
+                });
+                var request = await client.PostAsync("https://www.facebook.com/", content);
+                
+            }*/
+
+            Console.ReadLine();
+
+        }
+    }
+}
